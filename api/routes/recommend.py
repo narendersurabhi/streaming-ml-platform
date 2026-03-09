@@ -9,4 +9,9 @@ router = APIRouter()
 @router.post("/recommend", response_model=RecommendResponse)
 def recommend(payload: RecommendRequest, service=Depends(get_service)) -> RecommendResponse:
     result = service.recommend(payload.user_id, payload.top_k, payload.context)
-    return RecommendResponse(user_id=payload.user_id, recommendations=result["recommendations"], latency_ms=result["latency_ms"])
+    return RecommendResponse(
+        user_id=payload.user_id,
+        recommendations=result["recommendations"],
+        latency_ms=result["latency_ms"],
+        online_performance=result.get("online_performance"),
+    )

@@ -17,10 +17,9 @@ def test_fallback_recommendation(monkeypatch, tmp_path) -> None:
     df = pd.DataFrame({"item_id": ["m1", "m2"], "recent_popularity": [0.9, 0.8], "duration": [90, 80], "avg_completion_ratio_item": [0.7, 0.5]})
     df.to_csv(PROCESSED_DIR / "item_features.csv", index=False)
     from api.dependencies import get_service
+
     get_service.cache_clear()
-    # no model files should trigger startup issues only on recommend call; service fallback should work for unknown user when model exists not loaded
     client = TestClient(app)
-    # monkeypatch service retrieval call path by forcing dependency override
     from streaming_ml_platform.inference.service import RecommendationService
 
     class StubService:
@@ -31,10 +30,13 @@ def test_fallback_recommendation(monkeypatch, tmp_path) -> None:
             svc = RecommendationService.__new__(RecommendationService)
             svc.item_features = df
             svc.metrics = type("MM", (), {"inc": lambda *a, **k: None, "set_gauge": lambda *a, **k: None})()
-            return RecommendationService.fallback(svc, top_k)
+            recommendations = RecommendationService.fallback(svc, top_k)
+            return {"recommendations": recommendations, "latency_ms": 0, "online_performance": {"ctr": 0.0}}
 
     app.dependency_overrides[get_service] = lambda: StubService()
     resp = client.post("/recommend", json={"user_id": "cold", "top_k": 2, "context": {}})
     assert resp.status_code == 200
-    assert len(resp.json()["recommendations"]) == 2
+    body = resp.json()
+    assert len(body["recommendations"]) == 2
+    assert "online_performance" in body
     app.dependency_overrides.clear()

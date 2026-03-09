@@ -49,12 +49,11 @@ make test
 make lint
 ```
 
-## Future improvements
-- ANN retrieval backend with Faiss or ScaNN
-- Online feature store integration
-- Model registry backed by MLflow
-- Session-aware reranking
-- Expanded drift monitoring
+## Recently added enhancements
+- ANN-ready retrieval backend abstraction and sharded retrieval orchestrator for larger-scale serving.
+- In-memory online feature store with session-aware reranking signals.
+- Expanded drift and online performance monitoring utilities.
+- Managed model registry adapter with optional MLflow integration.
 
 ## Real-world mapping
 - Candidate generation mirrors collaborative filtering retrieval tiers in large recommender stacks.

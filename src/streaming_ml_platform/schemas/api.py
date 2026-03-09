@@ -19,3 +19,4 @@ class RecommendResponse(BaseModel):
     user_id: str
     recommendations: list[Recommendation]
     latency_ms: int
+    online_performance: dict[str, float] | None = None
