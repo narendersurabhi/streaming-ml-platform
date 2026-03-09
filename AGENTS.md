@@ -6,12 +6,13 @@
 - Added containerization, deployment manifests, CI workflow, tests, configs, and docs.
 
 ## Recent changes
-- Added Python package under `src/streaming_ml_platform` with modular components for data, features, models, pipelines, inference, monitoring, and utilities.
-- Added runnable scripts in `scripts/` to execute end-to-end local workflows.
-- Added API app and routes in `api/`.
-- Added deployment assets in `docker/` and `deployment/`.
-- Added pytest suite and lint setup.
-- Added README and architecture documentation.
+- Added ANN-ready retrieval backend abstraction and sharded retrieval orchestration in inference layer.
+- Added an online feature store module and session-aware reranking inputs in recommendation serving.
+- Expanded monitoring with drift report utilities (PSI + JSD) and online model-performance metrics.
+- Added managed registry adapter with optional MLflow integration and configurable registration script behavior.
+- Updated API response schema to surface online performance snapshot metadata.
+- Extended tests for retrieval, reranking, monitoring, and registry enhancements.
+- Updated README and inference config to document and configure new capabilities.
 
 ## Agent notes
 - Prefer `make` targets for standard workflows.

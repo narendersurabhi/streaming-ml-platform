@@ -1,2 +1,7 @@
 default_top_k: 10
 candidate_pool: 50
+retrieval_backend: default
+retrieval_shards: 1
+enable_online_feature_store: true
+managed_registry_backend: local
+mlflow_tracking_uri: null
