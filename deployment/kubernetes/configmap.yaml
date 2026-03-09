@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: streaming-ml-config
+  namespace: streaming-ml
+data:
+  SMP_ENV: production
+  SMP_API_PORT: "8000"

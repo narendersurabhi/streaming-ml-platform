@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+.env
+*.log
+data/raw/*.csv
+data/processed/*.csv
+data/artifacts/*
+!data/artifacts/.gitkeep

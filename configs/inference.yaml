@@ -1,0 +1,2 @@
+default_top_k: 10
+candidate_pool: 50

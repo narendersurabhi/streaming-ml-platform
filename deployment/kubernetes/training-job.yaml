@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: training-job
+  namespace: streaming-ml
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: training
+          image: streaming-ml-platform-training:latest
